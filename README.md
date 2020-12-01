@@ -1,1 +1,1 @@
-# wsd_project
+# Project for Web software development course in Aalto
