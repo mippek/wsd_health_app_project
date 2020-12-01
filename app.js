@@ -1,15 +1,10 @@
-import { Application, Router } from "./deps.js";
-import { executeQuery } from "./database/database.js";
+import { Application } from "./deps.js";
+import { router } from "./routes/routes.js";
+import * as middleware from "./middlewares/middlewares.js";
 
 const app = new Application();
-const router = new Router();
 
-const hello = async({response}) => {
-  const res = (await executeQuery("SELECT * FROM names;")).rowsOfObjects();
-  response.body = res;
-};
-
-router.get('/', hello);
+app.use(middleware.errorMiddleware);
 
 app.use(router.routes());
 
