@@ -10,7 +10,7 @@ const hello = ({render}) => {
 };
 
 const morning = ({render}) => {
-    render('morning.ejs');
+    render('reports/morning.ejs');
 }
 
 export { hello, morning };
