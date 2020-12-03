@@ -11,7 +11,7 @@ CREATE UNIQUE INDEX ON users((lower(email)));
 
 CREATE TABLE health_reports (
     id SERIAL PRIMARY KEY,
-    date TIMESTAMP WITH TIME ZONE,
+    date DATE,
     mood INTEGER,
     sleep_duration FLOAT,
     sleep_quality INTEGER,

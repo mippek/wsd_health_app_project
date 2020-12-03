@@ -1,10 +1,12 @@
 import { Router } from "../deps.js";
-import { hello, showMorningReport, submitMorningReport } from "./controllers/morningController.js";
+import { hello, showMorningReport, submitMorningReport, showEveningReport, submitEveningReport } from "./controllers/reportController.js";
 
 const router = new Router();
 
 router.get('/behavior/reporting', hello);
 router.get('/behavior/reporting/morning', showMorningReport);
 router.post('/behavior/reporting/morning', submitMorningReport);
+router.get('/behavior/reporting/evening', showEveningReport);
+router.post('/behavior/reporting/evening', submitEveningReport);
 
 export { router };
