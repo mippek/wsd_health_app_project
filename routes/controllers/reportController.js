@@ -2,12 +2,16 @@ import { validateData, getData, setData, getTodaysReportsFromDb } from "../../se
 
 /*import { executeQuery } from "../../database/database.js";
 const hello = async({response}) => {
+    const date = new Date(); 
     const res = (await executeQuery("SELECT * FROM health_reports;")).rowsOfObjects();
+    
+    
     response.body = res;
 };*/
 
 const hello = async({render}) => {
     const date = new Date();
+    console.log(date);
     const morningReports = await getTodaysReportsFromDb(date, true);
     const eveningReports = await getTodaysReportsFromDb(date, false);
 

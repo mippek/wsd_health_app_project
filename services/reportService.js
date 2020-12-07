@@ -73,6 +73,7 @@ const setData = async(data, isMorning) => {
         study_time: data.study_time,
         eating_quality: data.eating_quality,
     }
+    console.log(dbData.date);
 
     if (isMorning) {
         dbData.exercise_time = null;

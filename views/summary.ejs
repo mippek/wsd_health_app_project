@@ -1,0 +1,101 @@
+<%- include('./partials/header.ejs') %>
+
+<h1>Summary</h1>
+
+<h2>Weekly average</h2>
+<% if (weekly_average) { %>
+    <table>
+        <tr>
+            <td>
+                Average sleep duration:
+            </td>
+            <td>
+                <%= weekly_average.avg_sleep_duration %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Average sleep quality:
+            </td>
+            <td>
+                <%= weekly_average.avg_sleep_quality %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Average time spent on sports and exercise:
+            </td>
+            <td>
+                <%= weekly_average.avg_exercise_time %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Average time spent studying:
+            </td>
+            <td>
+                <%= weekly_average.avg_study_time %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Average mood:
+            </td>
+            <td>
+                <%= weekly_average.avg_mood %>
+            </td>
+        </tr>
+    </table>
+<% } else { %>
+    <p>No data for the given week exists.</p>
+<% } %>
+
+<h2>Monthly average</h2>
+<% if (monthly_average) { %>
+    <table>
+        <tr>
+            <td>
+                Average sleep duration:
+            </td>
+            <td>
+                <%= monthly_average.avg_sleep_duration %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Average sleep quality:
+            </td>
+            <td>
+                <%= monthly_average.avg_sleep_quality %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Average time spent on sports and exercise:
+            </td>
+            <td>
+                <%= monthly_average.avg_exercise_time %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Average time spent studying:
+            </td>
+            <td>
+                <%= monthly_average.avg_study_time %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Average mood:
+            </td>
+            <td>
+                <%= monthly_average.avg_mood %>
+            </td>
+        </tr>
+    </table>
+<% } else { %>
+    <p>No data for the given month exists.</p>
+<% } %>
+
+<%- include('./partials/footer.ejs') %>
