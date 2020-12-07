@@ -91,4 +91,8 @@ const setData = async(data, isMorning) => {
     );
 }
 
-export { validateData, getData, setData };
+const getTodaysReportsFromDb = async(date, isMorning) => {
+    return (await executeQuery("SELECT * FROM health_reports WHERE date = $1 AND morning_report = $2", date, isMorning)).rowsOfObjects();
+}
+
+export { validateData, getData, setData, getTodaysReportsFromDb };

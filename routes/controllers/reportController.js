@@ -1,4 +1,4 @@
-import { validateData, getData, setData } from "../../services/reportService.js";
+import { validateData, getData, setData, getTodaysReportsFromDb } from "../../services/reportService.js";
 
 /*import { executeQuery } from "../../database/database.js";
 const hello = async({response}) => {
@@ -6,8 +6,22 @@ const hello = async({response}) => {
     response.body = res;
 };*/
 
-const hello = ({render}) => {
-    render('index.ejs');
+const hello = async({render}) => {
+    const date = new Date();
+    const morningReports = await getTodaysReportsFromDb(date, true);
+    const eveningReports = await getTodaysReportsFromDb(date, false);
+
+    let morning = false;
+    let evening = false;
+
+    if (morningReports.length > 0) {
+        morning = true;
+    }
+    if (eveningReports.length > 0) {
+        evening = true;
+    }
+
+    render('index.ejs', {morning: morning, evening: evening});
 };
 
 const showMorningReport = async({render}) => {
