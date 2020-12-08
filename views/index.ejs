@@ -1,21 +1,80 @@
 <%- include('./partials/header.ejs') %>
 
 <h1>Health reporting app</h1>
+<p>
+    This is an app for health reporting. You can send reports of your current health status for each day.
+    There are two types of reports, morning reports and evening reports. Morning reports report your sleep 
+    duration and quality whereas evening reports report your eating, exercising and studying for the day. Both 
+    reports ask you for your mood for the day (morning or evening). 
+    <br/><br/>
+    Reports can be made from the button Reports. By default a new report is made for the current date
+    but the date can be changed to make older reports. However, only one morning report and one evening report
+    is saved for each day. If you make a new report for a day that already has the report, the old report is 
+    removed and the new report is saved instead. Only users logged in can submit reports. To login press the 
+    Login button. If you don't have an account, you can register pressing on the Register button.
+    <br/><br/>
+    The app shows a summary for each user by default from the past week and past month. You can change 
+    the week and month to see the summary of the week or month of your choice. The summary can be seen from the 
+    reports page, button Reports, as well.
 
-<% if (morning && evening) { %>
-    <p>Morning and evening reports for today have already been done!</p>
-<% } else if (morning) { %>
-    <p>Morning report for today has already been done!</p>
-<% } else if (evening) { %>
-    <p>Evening report for today has already been done!</p>
+</p>
+
+<h2>Data for a couple of days:</h2>
+<% if (avg_mood_today && avg_mood_yesterday) { %>
+    <% if (avg_mood_yesterday > avg_mood_today) { %>
+        <p>things are looking gloomy today &#8595</p>
+    <% } else { %>
+        <p>things are looking bright today &#8593</p>
+    <% } %>
+    <table>
+        <tr>
+            <td>Average mood today:</td>
+            <td><%= avg_mood_today %></td>
+        </tr>
+        <tr>
+            <td>Average mood yesterday:</td>
+            <td><%= avg_mood_yesterday %></td>
+        </tr>
+    </table>
+<% } else if (avg_mood_today) { %>
+    <table>
+        <tr>
+            <td>Average mood today:</td>
+            <td><%= avg_mood_today %></td>
+        </tr>
+        <tr>
+            <td>Average mood yesterday:</td>
+            <td>No data</td>
+        </tr>
+    </table>
+<% } else if (avg_mood_yesterday) { %>
+    <table>
+        <tr>
+            <td>Average mood today:</td>
+            <td>No data</td>
+        </tr>
+        <tr>
+            <td>Average mood yesterday:</td>
+            <td><%= avg_mood_yesterday %></td>
+        </tr>
+    </table>
 <% } else { %>
+    <tr>
+        <td>Average mood today:</td>
+        <td>No data</td>
+    </tr>
+    <tr>
+        <td>Average mood yesterday:</td>
+        <td>No data</td>
+    </tr>
 <% } %>
 
-<form method='GET' action='/behavior/reporting/morning'>
-    <input type='submit' value='Morning report' />
+<form action='/auth/login'>
+    <input type='submit' value='Login' />
 </form>
-<form method='GET' action='/behavior/reporting/evening'>
-    <input type='submit' value='Evening report' />
+<form action='/auth/register'>
+    <input type='submit' value='Register' />
 </form>
+
 
 <%- include('./partials/footer.ejs') %>

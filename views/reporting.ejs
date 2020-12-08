@@ -1,0 +1,21 @@
+<%- include('./partials/header.ejs') %>
+
+<h1>Health reporting app</h1>
+
+<% if (morning && evening) { %>
+    <p>Morning and evening reports for today have already been done!</p>
+<% } else if (morning) { %>
+    <p>Morning report for today has already been done!</p>
+<% } else if (evening) { %>
+    <p>Evening report for today has already been done!</p>
+<% } else { %>
+<% } %>
+
+<form method='GET' action='/behavior/reporting/morning'>
+    <input type='submit' value='Morning report' />
+</form>
+<form method='GET' action='/behavior/reporting/evening'>
+    <input type='submit' value='Evening report' />
+</form>
+
+<%- include('./partials/footer.ejs') %>

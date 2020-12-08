@@ -11,7 +11,7 @@ const hello = async({response}) => {
 
 const hello = async({render}) => {
     const date = new Date();
-    console.log(date);
+    
     const morningReports = await getTodaysReportsFromDb(date, true);
     const eveningReports = await getTodaysReportsFromDb(date, false);
 
@@ -25,7 +25,7 @@ const hello = async({render}) => {
         evening = true;
     }
 
-    render('index.ejs', {morning: morning, evening: evening});
+    render('reporting.ejs', {morning: morning, evening: evening});
 };
 
 const showMorningReport = async({render}) => {
