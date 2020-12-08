@@ -3,6 +3,7 @@
 <h1>Summary</h1>
 
 <h2>Weekly average</h2>
+<p>Week no. <%= week_no %></p>
 <% if (weekly_average) { %>
     <table>
         <tr>
@@ -50,7 +51,23 @@
     <p>No data for the given week exists.</p>
 <% } %>
 
+<p>Select a week:</p>
+<% if (week_errors) { %>
+    <ul>
+        <% Object.keys(week_errors).forEach((attribute) => { %>
+            <% Object.values(week_errors[attribute]).forEach((err) => { %>
+                <li><%= err %></li>
+            <% }); %>
+        <% }); %>
+    </ul>
+<% } %>
+<form method='POST' action='/behavior/summary/week'>
+    <input type='week' name='week' />
+    <input type='submit' value='Select!' />
+</form>
+
 <h2>Monthly average</h2>
+<p>Month no. <%= month_no %></p>
 <% if (monthly_average) { %>
     <table>
         <tr>
@@ -97,5 +114,20 @@
 <% } else { %>
     <p>No data for the given month exists.</p>
 <% } %>
+
+<p>Select a month:</p>
+<% if (month_errors) { %>
+    <ul>
+        <% Object.keys(month_errors).forEach((attribute) => { %>
+            <% Object.values(month_errors[attribute]).forEach((err) => { %>
+                <li><%= err %></li>
+            <% }); %>
+        <% }); %>
+    </ul>
+<% } %>
+<form method='POST' action='/behavior/summary/month'>
+    <input type='month' name='month' />
+    <input type='submit' value='Select!' />
+</form>
 
 <%- include('./partials/footer.ejs') %>
