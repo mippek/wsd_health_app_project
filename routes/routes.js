@@ -1,12 +1,19 @@
 import { Router } from "../deps.js";
 import { hello, showMorningReport, submitMorningReport, showEveningReport, submitEveningReport } from "./controllers/reportController.js";
 import { showSummary, setSummaryWeek, setSummaryMonth } from "./controllers/summaryController.js";
+import { showRegistration, register, showLogin, authenticate, logout } from "./controllers/userController.js";
+import { returnUserIfAuthenticated } from "../services/userService.js";
 
 import { executeQuery } from "../database/database.js";
 
 const router = new Router();
 
-const showIndexPage = async({render}) => {
+const getDailyAvg = async(date) => {
+    const res = (await executeQuery("SELECT COALESCE(AVG(CAST(mood AS FLOAT)), 0) AS avg_mood FROM health_reports WHERE date = $1", date)).rowsOfObjects();
+    return res;
+}
+
+const showIndexPage = async({render, session}) => {
     const today = new Date();
     const avg_mood_today = await getDailyAvg(today.toISOString().split('T')[0]);
     const yesterday = new Date();
@@ -14,14 +21,11 @@ const showIndexPage = async({render}) => {
     const avg_mood_yesterday = await getDailyAvg(yesterday.toISOString().split('T')[0]);
     /*console.log(avg_mood_today);
     console.log(avg_mood_yesterday);*/
-    render('index.ejs', {avg_mood_today: avg_mood_today[0].avg_mood, avg_mood_yesterday: avg_mood_yesterday[0].avg_mood});
-}
-
-const getDailyAvg = async(date) => {
-    console.log(date);
-    const res = (await executeQuery("SELECT COALESCE(AVG(CAST(mood AS FLOAT)), 0) AS avg_mood FROM health_reports WHERE date = $1 AND user_id = $2", date, 1)).rowsOfObjects();
-    console.log(res);
-    return res;
+    render('index.ejs', {
+        avg_mood_today: avg_mood_today[0].avg_mood, 
+        avg_mood_yesterday: avg_mood_yesterday[0].avg_mood, 
+        user: await returnUserIfAuthenticated(session)
+    });
 }
 
 router.get('/', showIndexPage);
@@ -35,5 +39,11 @@ router.post('/behavior/reporting/evening', submitEveningReport);
 router.get('/behavior/summary', showSummary);
 router.post('/behavior/summary/week', setSummaryWeek);
 router.post('/behavior/summary/month', setSummaryMonth);
+
+router.get('/auth/registration', showRegistration);
+router.post('/auth/registration', register);
+router.get('/auth/login', showLogin);
+router.post('/auth/login', authenticate);
+router.get('/auth/logout', logout);
 
 export { router };

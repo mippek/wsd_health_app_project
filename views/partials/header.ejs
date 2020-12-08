@@ -14,7 +14,13 @@
         <nav class='navigation'>
           <ul class='navigation_list'>
             <li class='navigation_item'><a href="/">Home</a></li>
-            <li class='navigation_item'><a href="/behavior/reporting">Report</a></li>
-            <li class='navigation_item'><a href="/behavior/summary">Summary</a></li>
+            <% if (user) { %>
+              <li class='navigation_item'><a href="/behavior/reporting">Report</a></li>
+              <li class='navigation_item'><a href="/behavior/summary">Summary</a></li>
+              <li class='login_item'>Logged in as <%= user.email %> | <a href="/auth/logout">Logout</a></li>
+            <% } else { %>
+              <li class='login_item'><a href="/auth/login">Login</a></li>
+              <li class='login_item'><a href="/auth/registration">Register</a></li>
+            <% } %>
           </ul>
         </nav>

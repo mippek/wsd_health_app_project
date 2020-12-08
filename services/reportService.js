@@ -45,24 +45,21 @@ const getData = async(request, isMorning) => {
     return data;
 }
 
-const deleteOldReport = async(date, isMorning) => {
+const deleteOldReport = async(date, userId, isMorning) => {
     let oldReport;
     if (isMorning) {
-        oldReport = (await executeQuery("SELECT * FROM health_reports WHERE date = $1 AND morning_report = $2", date, true)).rowsOfObjects();
+        oldReport = (await executeQuery("SELECT * FROM health_reports WHERE date = $1 AND morning_report = $2 AND user_id = $3", date, true, userId)).rowsOfObjects();
         
     } else {
-        oldReport = (await executeQuery("SELECT * FROM health_reports WHERE date = $1 AND evening_report = $2", date, true)).rowsOfObjects();
+        oldReport = (await executeQuery("SELECT * FROM health_reports WHERE date = $1 AND evening_report = $2 AND user_id = $3", date, true, userId)).rowsOfObjects();
     }
     if (oldReport.length > 0) {
         await executeQuery("DELETE FROM health_reports WHERE id = $1", oldReport[0].id);
     }
 }
 
-const setData = async(data, isMorning) => {
-    await deleteOldReport(data.date, isMorning);
-
-    let morningReport = true;
-    let eveningReport = false;
+const setData = async(data, userId, isMorning) => {
+    await deleteOldReport(data.date, userId, isMorning);
 
     const dbData = {
         date: data.date,
@@ -72,6 +69,9 @@ const setData = async(data, isMorning) => {
         exercise_time: data.exercise_time,
         study_time: data.study_time,
         eating_quality: data.eating_quality,
+        morning_report: true,
+        evening_report: false,
+        user_id: userId
     }
 
     if (isMorning) {
@@ -80,19 +80,19 @@ const setData = async(data, isMorning) => {
         dbData.eating_quality = null;
 
     } else {
-        morningReport = false;
-        eveningReport = true;
+        dbData.morningReport = false;
+        dbData.eveningReport = true;
         dbData.sleep_duration = null;
         dbData.sleep_quality = null;
     }
         
     await executeQuery("INSERT INTO health_reports (date, mood, sleep_duration, sleep_quality, exercise_time, study_time, eating_quality, morning_report, evening_report, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", 
-        dbData.date, dbData.mood, dbData.sleep_duration, dbData.sleep_quality, dbData.exercise_time, dbData.study_time, dbData.eating_quality, morningReport, eveningReport, 1
+        dbData.date, dbData.mood, dbData.sleep_duration, dbData.sleep_quality, dbData.exercise_time, dbData.study_time, dbData.eating_quality, dbData.morning_report, dbData.evening_report, dbData.user_id
     );
 }
 
-const getTodaysReportsFromDb = async(date, isMorning) => {
-    return (await executeQuery("SELECT * FROM health_reports WHERE date = $1 AND morning_report = $2", date, isMorning)).rowsOfObjects();
+const getTodaysReportsFromDb = async(date, userId, isMorning) => {
+    return (await executeQuery("SELECT * FROM health_reports WHERE date = $1 AND user_id = $2 AND morning_report = $3", date, userId, isMorning)).rowCount;
 }
 
 export { validateData, getData, setData, getTodaysReportsFromDb };

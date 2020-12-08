@@ -19,4 +19,12 @@ const serveStaticFiles = async (context, next) => {
   }
 }
 
-export { errorMiddleware, serveStaticFiles };
+const authMiddleware = async({request, response, session}, next) => {
+  if (request.url.pathname !== '/' && !request.url.pathname.startsWith('/api') && !request.url.pathname.startsWith('/auth') && !(await session.get('authenticated'))) {
+    response.redirect('/auth/login');
+  } else {
+    await next();
+  }
+}
+
+export { errorMiddleware, serveStaticFiles, authMiddleware };
