@@ -3,6 +3,7 @@ import { hello, showMorningReport, submitMorningReport, showEveningReport, submi
 import { showSummary, setSummaryWeek, setSummaryMonth } from "./controllers/summaryController.js";
 import { showRegistration, register, showLogin, authenticate, logout } from "./controllers/userController.js";
 import { returnUserIfAuthenticated } from "../services/userService.js";
+import { showSummaryAvgForWeek, showSummaryAvgForDay } from "./apis/summaryApi.js";
 
 import { executeQuery } from "../database/database.js";
 
@@ -45,5 +46,8 @@ router.post('/auth/registration', register);
 router.get('/auth/login', showLogin);
 router.post('/auth/login', authenticate);
 router.get('/auth/logout', logout);
+
+router.get('/api/summary', showSummaryAvgForWeek);
+router.get('/api/summary/:year/:month/:day', showSummaryAvgForDay);
 
 export { router };
