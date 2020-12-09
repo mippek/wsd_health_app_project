@@ -3,7 +3,7 @@
 ## Creating the database
 Create the database by running the following CREATE TABLE commands:
 
- CREATE TABLE users (
+CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email VARCHAR(320) NOT NULL,
   password CHAR(60) NOT NULL
