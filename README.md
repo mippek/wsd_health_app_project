@@ -33,7 +33,7 @@ CREATE TABLE users (
  The project can be run locally from the file app.js.  
  To run the application locally go to the root directory where the app.js should be.  
  Then run the following command:  
- * deno run --unstable --allow-env --allow-read --allow-net app.js
+ * deno run --unstable --allow-env --allow-read --allow-net app.js  
  The application should now be running at http://localhost:7777/  
  
  
