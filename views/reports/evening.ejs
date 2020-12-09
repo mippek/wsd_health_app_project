@@ -15,6 +15,7 @@
 <form method='POST' action='/behavior/reporting/evening'>
     <label for='date'>Date:</label>
     <input type='date' id='date' name='date' value='<%= date %>' />
+    <script>document.getElementById('date').value = new Date().toISOString().substring(0, 10)</script>
     <br />
 
     <label for='exercise_time'>Time spent exercising:</label>

@@ -1,16 +1,7 @@
 import { validateData, getData, setData, getTodaysReportsFromDb } from "../../services/reportService.js";
 import { returnUserIfAuthenticated } from "../../services/userService.js";
 
-import { executeQuery } from "../../database/database.js";
-/*const hello = async({response}) => {
-    const date = new Date(); 
-    const res = (await executeQuery("SELECT * FROM health_reports;")).rowsOfObjects();
-    
-    
-    response.body = res;
-};*/
-
-const hello = async({render, session}) => {
+const showReporting = async({render, session}) => {
     const user = await returnUserIfAuthenticated(session);
     const date = new Date().toISOString().split('T')[0];
     const userId = user.id; 
@@ -84,4 +75,4 @@ const submitEveningReport = async({request, render, response, session}) => {
     
 }
 
-export { hello, showMorningReport, submitMorningReport, showEveningReport, submitEveningReport };
+export { showReporting, showMorningReport, submitMorningReport, showEveningReport, submitEveningReport };

@@ -3,7 +3,7 @@
 <h1>Summary</h1>
 
 <h2>Weekly average</h2>
-<p>Week no. <%= week_no %></p>
+<p>Week no. <%= week_no %>, <%= week_year %></p>
 <% if (weekly_average) { %>
     <table>
         <tr>
@@ -51,7 +51,7 @@
     <p>No data for the given week exists.</p>
 <% } %>
 
-<p>Select a week:</p>
+<h3>Select a week:</h3>
 <% if (week_errors) { %>
     <ul>
         <% Object.keys(week_errors).forEach((attribute) => { %>
@@ -62,12 +62,29 @@
     </ul>
 <% } %>
 <form method='POST' action='/behavior/summary/week'>
-    <input type='week' name='week' />
-    <input type='submit' value='Select!' />
+    <div class='defaultWeek'>
+        <input type='week' name='default_week' min='2017-W01' max='2020-W52' />
+        <input type='submit' value='Select!' />
+    </div>
+    <div class='backupWeek'>
+        <label for='week'>Week:</label>
+        <select id='week' name='week'>
+            <option value="none" selected disabled hidden> -- </option>
+        </select>
+        <label for='year'>Year:</label>
+        <select id='year' name='year'>
+            <option value="none" selected disabled hidden> ---- </option>
+            <option value='2020'>2020</option>
+            <option value='2019'>2019</option>
+            <option value='2018'>2018</option>
+            <option value='2017'>2017</option>
+        </select>
+        <input type='submit' value='Select!' />
+    </div>
 </form>
 
 <h2>Monthly average</h2>
-<p>Month no. <%= month_no %></p>
+<p>Month no. <%= month_no %>, <%= month_year %></p>
 <% if (monthly_average) { %>
     <table>
         <tr>
@@ -115,7 +132,7 @@
     <p>No data for the given month exists.</p>
 <% } %>
 
-<p>Select a month:</p>
+<h3>Select a month:</h3>
 <% if (month_errors) { %>
     <ul>
         <% Object.keys(month_errors).forEach((attribute) => { %>
@@ -126,8 +143,25 @@
     </ul>
 <% } %>
 <form method='POST' action='/behavior/summary/month'>
-    <input type='month' name='month' />
-    <input type='submit' value='Select!' />
+    <div class='defaultMonth'>
+        <input type='month' name='default_month' min='2017-01' max='2020-12' />
+        <input type='submit' value='Select!' />
+    </div>
+    <div class='backupMonth'>
+        <label for='month'>Month:</label>
+        <select id='month' name='month'>
+            <option value="none" selected disabled hidden> -- </option>
+        </select>
+        <label for='year'>Year:</label>
+        <select id='year' name='year'>
+            <option value="none" selected disabled hidden> ---- </option>
+            <option value='2020'>2020</option>
+            <option value='2019'>2019</option>
+            <option value='2018'>2018</option>
+            <option value='2017'>2017</option>
+        </select>
+        <input type='submit' value='Select!' />
+    </div>
 </form>
 
 <%- include('./partials/footer.ejs') %>
