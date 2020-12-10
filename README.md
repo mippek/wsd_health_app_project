@@ -11,9 +11,9 @@ CREATE TABLE users (
   password CHAR(60) NOT NULL  
 );  
 
- CREATE UNIQUE INDEX ON users((lower(email)));  
+CREATE UNIQUE INDEX ON users((lower(email)));  
 
- CREATE TABLE health_reports (  
+CREATE TABLE health_reports (  
     id SERIAL PRIMARY KEY,  
     date DATE,  
     mood INTEGER,  
@@ -35,22 +35,21 @@ CREATE TABLE users (
  The project can be run locally from the file app.js in the root directory of the project.  
  To run the application locally go to the root directory, you should find the file app.js there.  
  Then run the following command:  
- * deno run --unstable --allow-env --allow-read --allow-net app.js    
+ * `deno run --unstable --allow-env --allow-read --allow-net app.js`    
  
  The application should now be running at http://localhost:7777/  
  
  ### Running tests
  All of the tests can be run with the following command:   
- * deno run test  
+ * `deno run test`  
  
  The tests can also be run individually with the following command:
- * deno run test app_test.js  
+ * `deno run test app_test.js` 
  
  Where app_test.js should be replaced with the test file that you want to test.
  
  ### Access application
- The application is currently running and can be accessed at the following address:  
- http://www.some-address.com/  
+ The application is currently running and can be accessed at http://www.some-address.com/  
  
  ## Project requirements implemented in the project
  
