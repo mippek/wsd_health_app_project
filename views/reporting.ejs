@@ -1,6 +1,10 @@
 <%- include('./partials/header.ejs') %>
 
 <h1>Make a report</h1>
+<p>Choose the type of the report you want to make:</p>
+
+<button type='button' class='link_button'><a href='/behavior/reporting/morning'>Morning report</a></button>
+<button type='button' class='link_button'><a href='/behavior/reporting/evening'>Evening report</a></button>
 
 <% if (morning && evening) { %>
     <p>Morning and evening reports for today have already been done!</p>
@@ -10,12 +14,5 @@
     <p>Evening report for today has already been done!</p>
 <% } else { %>
 <% } %>
-
-<form method='GET' action='/behavior/reporting/morning'>
-    <input type='submit' value='Morning report' />
-</form>
-<form method='GET' action='/behavior/reporting/evening'>
-    <input type='submit' value='Evening report' />
-</form>
 
 <%- include('./partials/footer.ejs') %>

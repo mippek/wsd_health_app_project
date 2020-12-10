@@ -9,23 +9,23 @@
     <script>document.getElementById('date').value = new Date().toISOString().substring(0, 10)</script>
     <br />
 
-    <label for='exercise_time'>Time spent exercising:</label>
+    <label for='exercise_time'>Time spent exercising (in hours, with 0.5h accuracy):</label>
     <input type='number' id='exercise_time' name='exercise_time' value='<%= exercise_time %>' min='0' max='24' step='0.1' />
     <%- include('../partials/error.ejs', { errors: errors, attribute: 'exercise_time'}) %>
     <br />
 
-    <label for='study_time'>Time spent studying:</label>
+    <label for='study_time'>Time spent studying (in hours, with 0.5h accuracy):</label>
     <input type='number' id='study_time' name='study_time' value='<%= study_time %>' min='0' max='24' step='0.1' />
     <%- include('../partials/error.ejs', { errors: errors, attribute: 'study_time'}) %>
     <br />
 
-    <label for='eating_quality'>Quality of eating:</label>
+    <label for='eating_quality'>Quality of eating (on scale 1-5):</label>
     <input type='range' id='eating_quality' name='eating_quality' value='<%= eating_quality %>' min='1' max='5' onchange="updateValue('eating_quality', 'eating_quality_value')" />
     <label for='eating_quality' id='eating_quality_value'> 3 - okay </label>
     <%- include('../partials/error.ejs', { errors: errors, attribute: 'eating_quality'}) %>
     <br />
 
-    <label for='mood'>Generic mood:</label>
+    <label for='mood'>Generic mood (on scale 1-5):</label>
     <input type='range' id='mood' name='mood' value='<%= mood %>' min='1' max='5' onchange="updateValue('mood', 'mood_value')" />
     <label for='mood' id='mood_value'> 3 - okay </label>
     <%- include('../partials/error.ejs', { errors: errors, attribute: 'mood'}) %>
