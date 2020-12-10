@@ -18,15 +18,12 @@ const showSummary = async({render, session}) => {
     const user = await returnUserIfAuthenticated(session);
     const userId = user.id;
     const data = await getSummaryData();
-    console.log(data);
     const addedData = {
         weekly_average: (await getWeeklyAvg(data.week_no, userId))[0],
         monthly_average: (await getMonthlyAvg(data.month_no, userId))[0],
         user: user
     }
     setSummaryData(addedData);
-
-    console.log(await getSummaryData());
     
     render('summary.ejs', await getSummaryData());
 }

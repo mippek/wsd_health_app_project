@@ -1,4 +1,5 @@
 import { send } from "../deps.js";
+import { returnUserIfAuthenticated } from "../services/userService.js";
 
 const errorMiddleware = async(context, next) => {
     try {
@@ -6,6 +7,18 @@ const errorMiddleware = async(context, next) => {
     } catch (e) {
       console.log(e);
     }
+}
+
+const loggerMiddleware = async({request, session}, next) => {
+  const user = await returnUserIfAuthenticated(session);
+  const time = new Date();
+  const formatted_time = `${time.getFullYear()}-${time.getMonth() + 1}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
+  if (!user) {
+    console.log(`${request.method} ${request.url.pathname} ${formatted_time} user_id: anonymous`);
+  } else {
+    console.log(`${request.method} ${request.url.pathname} ${formatted_time} user_id: ${user.id}`);
+  }
+  await next();
 }
 
 const serveStaticFiles = async (context, next) => {
@@ -27,4 +40,4 @@ const authMiddleware = async({request, response, session}, next) => {
   }
 }
 
-export { errorMiddleware, serveStaticFiles, authMiddleware };
+export { errorMiddleware, loggerMiddleware, serveStaticFiles, authMiddleware };
