@@ -9,7 +9,7 @@ const showRegistration = async({render, session}) => {
 const register = async({request, render, response, session}) => {
     const user = await returnUserIfAuthenticated(session);
     const data = await getData(request, true);
-    const [passes, errors] = await validateData(data);
+    const [passes, errors] = await validateData(data, true);
 
     if (!passes) {
         data.errors = errors;

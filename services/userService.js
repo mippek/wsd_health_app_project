@@ -2,13 +2,23 @@ import { executeQuery } from "../database/database.js";
 import { bcrypt } from "../deps.js";
 import { validate, required, isEmail, minLength } from "../deps.js";
 
-const validationRules = {
+const loginValidationRules = {
     email: [required, isEmail],
     password: [required, minLength(4)],
 };
 
-const validateData = async(data) => {
-    return await validate(data, validationRules);
+const registerValidationRules = {
+    email: [required, isEmail],
+    password: [required, minLength(4)],
+    verification: [required, minLength(4)]
+}
+
+const validateData = async(data, isRegistration) => {
+    if (isRegistration) {
+        return await validate(data, registerValidationRules);
+    } else {
+        return await validate(data, loginValidationRules);
+    }
 }
 
 const getData = async(request, isRegistration) => {

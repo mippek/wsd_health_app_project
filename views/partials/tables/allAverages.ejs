@@ -1,0 +1,46 @@
+<% if (average) { %>
+    <table>
+        <tr>
+            <td>
+                Average sleep duration:
+            </td>
+            <td>
+                <%= average.avg_sleep_duration %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Average sleep quality:
+            </td>
+            <td>
+                <%= average.avg_sleep_quality %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Average time spent on sports and exercise:
+            </td>
+            <td>
+                <%= average.avg_exercise_time %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Average time spent studying:
+            </td>
+            <td>
+                <%= average.avg_study_time %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Average mood:
+            </td>
+            <td>
+                <%= average.avg_mood %>
+            </td>
+        </tr>
+    </table>  
+<% } else { %>
+    <p>No data for the given time period exists.</p>
+<% } %>

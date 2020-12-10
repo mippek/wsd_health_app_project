@@ -1,7 +1,7 @@
 import { executeQuery } from "../database/database.js";
 import { validate, required, isDate, isNumber, isInt, numberBetween } from "../deps.js";
 
-const validationRules = {
+/*const validationRules = {
     date: [required, isDate],
     mood: [required, isInt, numberBetween(1,5)],
     sleep_duration: [required, isNumber, numberBetween(0, 24)],
@@ -9,10 +9,44 @@ const validationRules = {
     exercise_time: [required, isNumber, numberBetween(0, 24)],
     study_time: [required, isNumber, numberBetween(0, 24)],
     eating_quality: [required, isInt, numberBetween(1,5)],
+};*/
+
+const morningValidationRules = {
+    date: [required, isDate],
+    mood: [required, isInt, numberBetween(1,5)],
+    sleep_duration: [required, isNumber, numberBetween(0, 24)],
+    sleep_quality: [required, isInt, numberBetween(1,5)],
 };
 
-const validateData = async(data) => {
+const eveningValidationRules = {
+    date: [required, isDate],
+    mood: [required, isInt, numberBetween(1,5)],
+    exercise_time: [required, isNumber, numberBetween(0, 24)],
+    study_time: [required, isNumber, numberBetween(0, 24)],
+    eating_quality: [required, isInt, numberBetween(1,5)],
+};
+
+const validateData = async(data, isMorning) => {
+    if (isMorning) {
+        return await validate(data, morningValidationRules);
+    } else {
+        return await validate(data, eveningValidationRules);
+    }
+}
+
+/*const validateData = async(data) => {
     return await validate(data, validationRules);
+}*/
+
+const returnNumberIfNumber = (value) => {
+    if (!value) {
+        return undefined;
+    }
+    const possibleNumber = Number(value);
+    if (Number.isNaN(possibleNumber)) {
+        return value;
+    }
+    return possibleNumber;
 }
 
 const getData = async(request, isMorning) => {
@@ -31,14 +65,14 @@ const getData = async(request, isMorning) => {
         const body = request.body();
         const params = await body.value;
         data.date = params.get('date');
-        data.mood = Number(params.get('mood'));
+        data.mood = returnNumberIfNumber(params.get('mood'));
         if (isMorning) {
-            data.sleep_duration = Number(params.get('sleep_duration'));
-            data.sleep_quality = Number(params.get('sleep_quality'));
+            data.sleep_duration = returnNumberIfNumber(params.get('sleep_duration'));
+            data.sleep_quality = returnNumberIfNumber(params.get('sleep_quality'));
         } else {
-            data.exercise_time = Number(params.get('exercise_time'));
-            data.study_time = Number(params.get('study_time'));
-            data.eating_quality = Number(params.get('eating_quality'));
+            data.exercise_time = returnNumberIfNumber(params.get('exercise_time'));
+            data.study_time = returnNumberIfNumber(params.get('study_time'));
+            data.eating_quality = returnNumberIfNumber(params.get('eating_quality'));
         }
     }
 
@@ -95,4 +129,4 @@ const getTodaysReportsFromDb = async(date, userId, isMorning) => {
     return (await executeQuery("SELECT * FROM health_reports WHERE date = $1 AND user_id = $2 AND morning_report = $3", date, userId, isMorning)).rowCount;
 }
 
-export { validateData, getData, setData, getTodaysReportsFromDb };
+export { validateData, returnNumberIfNumber, getData, setData, getTodaysReportsFromDb };

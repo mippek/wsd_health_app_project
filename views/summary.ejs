@@ -4,73 +4,23 @@
 
 <h2>Weekly average</h2>
 <p>Week no. <%= week_no %>, <%= week_year %></p>
-<% if (weekly_average) { %>
-    <table>
-        <tr>
-            <td>
-                Average sleep duration:
-            </td>
-            <td>
-                <%= weekly_average.avg_sleep_duration %>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Average sleep quality:
-            </td>
-            <td>
-                <%= weekly_average.avg_sleep_quality %>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Average time spent on sports and exercise:
-            </td>
-            <td>
-                <%= weekly_average.avg_exercise_time %>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Average time spent studying:
-            </td>
-            <td>
-                <%= weekly_average.avg_study_time %>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Average mood:
-            </td>
-            <td>
-                <%= weekly_average.avg_mood %>
-            </td>
-        </tr>
-    </table>
-<% } else { %>
-    <p>No data for the given week exists.</p>
-<% } %>
+<%- include('./partials/tables/allAverages.ejs', { average: weekly_average }) %>
 
 <h3>Select a week:</h3>
-<% if (week_errors) { %>
-    <ul>
-        <% Object.keys(week_errors).forEach((attribute) => { %>
-            <% Object.values(week_errors[attribute]).forEach((err) => { %>
-                <li><%= err %></li>
-            <% }); %>
-        <% }); %>
-    </ul>
-<% } %>
 <form method='POST' action='/behavior/summary/week'>
     <div class='defaultWeek'>
+        <%- include('./partials/error.ejs', { errors: week_errors, attribute: 'week_no'}) %>
+        <%- include('./partials/error.ejs', { errors: week_errors, attribute: 'week_year'}) %>
         <input type='week' name='default_week' min='2017-W01' max='2020-W52' />
         <input type='submit' value='Select!' />
     </div>
     <div class='backupWeek'>
+        <%- include('./partials/error.ejs', { errors: week_errors, attribute: 'week_no'}) %>
         <label for='week'>Week:</label>
         <select id='week' name='week'>
             <option value="none" selected disabled hidden> -- </option>
         </select>
+        <%- include('./partials/error.ejs', { errors: week_errors, attribute: 'week_year'}) %>
         <label for='year'>Year:</label>
         <select id='year' name='year'>
             <option value="none" selected disabled hidden> ---- </option>
@@ -85,73 +35,24 @@
 
 <h2>Monthly average</h2>
 <p>Month no. <%= month_no %>, <%= month_year %></p>
-<% if (monthly_average) { %>
-    <table>
-        <tr>
-            <td>
-                Average sleep duration:
-            </td>
-            <td>
-                <%= monthly_average.avg_sleep_duration %>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Average sleep quality:
-            </td>
-            <td>
-                <%= monthly_average.avg_sleep_quality %>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Average time spent on sports and exercise:
-            </td>
-            <td>
-                <%= monthly_average.avg_exercise_time %>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Average time spent studying:
-            </td>
-            <td>
-                <%= monthly_average.avg_study_time %>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Average mood:
-            </td>
-            <td>
-                <%= monthly_average.avg_mood %>
-            </td>
-        </tr>
-    </table>
-<% } else { %>
-    <p>No data for the given month exists.</p>
-<% } %>
+<%- include('./partials/tables/allAverages.ejs', { average: monthly_average }) %>
+
 
 <h3>Select a month:</h3>
-<% if (month_errors) { %>
-    <ul>
-        <% Object.keys(month_errors).forEach((attribute) => { %>
-            <% Object.values(month_errors[attribute]).forEach((err) => { %>
-                <li><%= err %></li>
-            <% }); %>
-        <% }); %>
-    </ul>
-<% } %>
 <form method='POST' action='/behavior/summary/month'>
     <div class='defaultMonth'>
+        <%- include('./partials/error.ejs', { errors: month_errors, attribute: 'month_no'}) %>
+        <%- include('./partials/error.ejs', { errors: month_errors, attribute: 'month_year'}) %>
         <input type='month' name='default_month' min='2017-01' max='2020-12' />
         <input type='submit' value='Select!' />
     </div>
     <div class='backupMonth'>
+        <%- include('./partials/error.ejs', { errors: month_errors, attribute: 'month_no'}) %>
         <label for='month'>Month:</label>
         <select id='month' name='month'>
             <option value="none" selected disabled hidden> -- </option>
         </select>
+        <%- include('./partials/error.ejs', { errors: month_errors, attribute: 'month_year'}) %>
         <label for='year'>Year:</label>
         <select id='year' name='year'>
             <option value="none" selected disabled hidden> ---- </option>

@@ -2,35 +2,28 @@
 
 <h1>Morning report:</h1>
 
-<% if (errors) { %>
-    <ul>
-        <% Object.keys(errors).forEach((attribute) => { %>
-            <% Object.values(errors[attribute]).forEach((err) => { %>
-                <li><%= err %></li>
-            <% }); %>
-        <% }); %>
-    </ul>
-<% } %>
-
 <form method='POST' action='/behavior/reporting/morning'>
     <label for='date'>Date:</label>
     <input type='date' id='date' name='date' value='<%= date %>' />
+    <%- include('../partials/error.ejs', { errors: errors, attribute: 'date'}) %>
     <script>document.getElementById('date').value = new Date().toISOString().substring(0, 10)</script>
-
     <br />
 
     <label for='sleep_duration'>Sleep duration:</label>
     <input type='number' id='sleep_duration' name='sleep_duration' value='<%= sleep_duration %>' min='0' max='24' step='0.1' />
+    <%- include('../partials/error.ejs', { errors: errors, attribute: 'sleep_duration'}) %>
     <br />
 
     <label for='sleep_quality'>Sleep quality:</label>
     <input type='range' id='sleep_quality' name='sleep_quality' value='<%= sleep_quality %>' min='1' max='5' onchange="updateValue('sleep_quality', 'sleep_quality_value')" />
     <label for='sleep_quality' id='sleep_quality_value'> 3 - okay </label>
+    <%- include('../partials/error.ejs', { errors: errors, attribute: 'sleep_quality'}) %>
     <br />
     
     <label for='mood'>Generic mood:</label>
     <input type='range' id='mood' name='mood' value='<%= mood %>' min='1' max='5' onchange="updateValue('mood', 'mood_value')" />
     <label for='mood' id='mood_value'> 3 - okay </label>
+    <%- include('../partials/error.ejs', { errors: errors, attribute: 'mood'}) %>
     <br />
     <input type='submit' value='Send report!' />
 </form>

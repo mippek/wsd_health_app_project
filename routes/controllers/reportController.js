@@ -37,7 +37,7 @@ const submitMorningReport = async({request, render, response, session}) => {
     const user = await returnUserIfAuthenticated(session);
     const data = await getData(request, true);
     const userId = user.id; 
-    const [passes, errors] = await validateData(data);
+    const [passes, errors] = await validateData(data, true);
     
     if (!passes) {
         data.errors = errors;
@@ -61,7 +61,7 @@ const submitEveningReport = async({request, render, response, session}) => {
     const user = await returnUserIfAuthenticated(session);
     const data = await getData(request, false);
     const userId = user.id; 
-    const [passes, errors] = await validateData(data);
+    const [passes, errors] = await validateData(data, false);
     
     if (!passes) {
         data.errors = errors;

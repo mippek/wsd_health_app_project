@@ -31,47 +31,13 @@
     <% } else { %>
         <p>things are looking bright today &#8593</p>
     <% } %>
-    <table>
-        <tr>
-            <td>Average mood today:</td>
-            <td><%= avg_mood_today %></td>
-        </tr>
-        <tr>
-            <td>Average mood yesterday:</td>
-            <td><%= avg_mood_yesterday %></td>
-        </tr>
-    </table>
+    <%- include('./partials/tables/moodAvg.ejs', { avg_mood_today: avg_mood_today, avg_mood_yesterday: avg_mood_today }) %>
 <% } else if (avg_mood_today) { %>
-    <table>
-        <tr>
-            <td>Average mood today:</td>
-            <td><%= avg_mood_today %></td>
-        </tr>
-        <tr>
-            <td>Average mood yesterday:</td>
-            <td>No data</td>
-        </tr>
-    </table>
+    <%- include('./partials/tables/moodAvg.ejs', { avg_mood_today: avg_mood_today, avg_mood_yesterday: 'No data' }) %>
 <% } else if (avg_mood_yesterday) { %>
-    <table>
-        <tr>
-            <td>Average mood today:</td>
-            <td>No data</td>
-        </tr>
-        <tr>
-            <td>Average mood yesterday:</td>
-            <td><%= avg_mood_yesterday %></td>
-        </tr>
-    </table>
+    <%- include('./partials/tables/moodAvg.ejs', { avg_mood_today: 'No data', avg_mood_yesterday: avg_mood_today }) %>
 <% } else { %>
-    <tr>
-        <td>Average mood today:</td>
-        <td>No data</td>
-    </tr>
-    <tr>
-        <td>Average mood yesterday:</td>
-        <td>No data</td>
-    </tr>
+    <%- include('./partials/tables/moodAvg.ejs', { avg_mood_today: 'No data', avg_mood_yesterday: 'No data' }) %>
 <% } %>
 
 

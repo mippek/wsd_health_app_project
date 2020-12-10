@@ -1,13 +1,14 @@
 import { executeQuery } from "../database/database.js";
 import { validate, required, isDate, isInt, numberBetween } from "../deps.js";
+import { returnNumberIfNumber } from "./reportService.js";
 
 const weekValidationRules = {
     week_no: [required, isInt, numberBetween(1, 52)],
-    week_year: [required, isInt, numberBetween(0, 2020)]
+    week_year: [required, isInt, numberBetween(2017, 2020)]
 };
 const monthValidationRules = {
     month_no: [required, isInt, numberBetween(1, 12)],
-    month_year: [required, isInt, numberBetween(0, 2020)]
+    month_year: [required, isInt, numberBetween(2017, 2020)]
 };
 
 const validateData = async(data, isWeek) => {
@@ -62,26 +63,35 @@ const getSummaryData = async(request, isWeek) => {
             const year = params.get('year');
             if (isWeek) {
                 const week = params.get('week');
-                console.log(week);
-                data.week_no = Number(week);
-                data.week_year = Number(year);
+                data.week_no = returnNumberIfNumber(week);
+                data.week_year = returnNumberIfNumber(year);
             } else {
                 const month = params.get('month');
-                data.month_no = Number(month);
-                data.month_year = Number(year);
+                data.month_no = returnNumberIfNumber(month);
+                data.month_year = returnNumberIfNumber(year);
             }
+        } else if (isWeek) {
+                let year = undefined;
+                let week = undefined;
+                if (params.get('default_week')) {
+                    year = params.get('default_week').split('-')[0];
+                    week = params.get('default_week').split('W')[1];
+                } else if (params.get('week')) {
+                    week = params.get('week');
+                }
+                data.week_no = returnNumberIfNumber(week);
+                data.week_year = returnNumberIfNumber(year);
         } else {
-            if (isWeek) {
-                const year = params.get('default_week').split('-')[0];
-                const week = params.get('default_week').split('W')[1];
-                data.week_no = Number(week);
-                data.week_year = Number(year);
-            } else {
-                const year = params.get('default_month').split('-')[0];
-                const month = params.get('default_month').split('-')[1];
-                data.month_no = Number(month);
-                data.month_year = Number(year);
-            }
+                let year = undefined;
+                let month = undefined;
+                if (params.get('default_month')) {
+                    year = params.get('default_month').split('-')[0];
+                    month = params.get('default_month').split('-')[1];
+                } else if (params.get('month')) {
+                    month = params.get('month');
+                }
+                data.month_no = returnNumberIfNumber(month);
+                data.month_year = returnNumberIfNumber(year);
         }
     }
 

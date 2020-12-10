@@ -35,8 +35,8 @@ const submitSummaryWeek = async({request, render, response, session}) => {
     
     if (!passes) {
         data.week_errors = errors;
-        data.week_no = '--';
-        data.week_year = '----';
+        data.week_no = !data.week_no ? '--' : data.week_no;
+        data.week_year = !data.week_year ? '----' : data.week_year;
         data.weekly_average = null;
         data.user = user;
         render('summary.ejs', data);
