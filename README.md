@@ -41,12 +41,13 @@ CREATE TABLE health_reports (
  
  ### Running tests
  All of the tests can be run with the following command:   
- * `deno run test`  
+ * `deno test --unstable --allow-env --allow-net`  
  
- The tests can also be run individually with the following command:
- * `deno run test app_test.js` 
+ The different test files can also be run individually with the following command:
+ * `deno test --unstable --allow-env --allow-net ./tests/app_test.js` 
  
- Where app_test.js should be replaced with the test file that you want to test.
+ Where ./tests/app_test.js should be replaced with the path of the test file that you want to test.
+ Note that the individual test files can't be run without the path to the file!
  
  ### Access application
  The application is currently running and can be accessed at http://www.some-address.com/  
