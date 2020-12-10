@@ -1,15 +1,15 @@
-# Project for Web software development course in Aalto
+# Project for Web Software Development course in Aalto
 
 ## Running the project
 
 ### Creating the database
-Create the database by running the following CREATE TABLE commands in your database:  
+Create the database by running the following CREATE TABLE commands in your own database:  
 
 CREATE TABLE users (  
   id SERIAL PRIMARY KEY,  
   email VARCHAR(320) NOT NULL,  
   password CHAR(60) NOT NULL  
- );  
+);  
 
  CREATE UNIQUE INDEX ON users((lower(email)));  
 
@@ -32,19 +32,52 @@ CREATE TABLE users (
  ALTER TABLE health_reports ALTER COLUMN evening_report SET DEFAULT false;  
  
  ### Running the project locally
- The project can be run locally from the file app.js.  
- To run the application locally go to the root directory where the app.js should be.  
+ The project can be run locally from the file app.js in the root directory of the project.  
+ To run the application locally go to the root directory, you should find the file app.js there.  
  Then run the following command:  
- * deno run --unstable --allow-env --allow-read --allow-net app.js  
- The application should now be running at http://localhost:7777/  
+ * deno run --unstable --allow-env --allow-read --allow-net app.js    
  
+ The application should now be running at http://localhost:7777/  
  
  ### Running tests
  All of the tests can be run with the following command:   
- * deno run app_test.js
+ * deno run test  
+ 
+ The tests can also be run individually with the following command:
+ * deno run test app_test.js  
+ 
+ Where app_test.js should be replaced with the test file that you want to test.
  
  ### Access application
- The application can currently be accessed at the following address:  
+ The application is currently running and can be accessed at the following address:  
  http://www.some-address.com/  
  
  ## Project requirements implemented in the project
+ 
+ ### Application structure
+ 
+ ### Users
+ 
+ ### Authentication
+ 
+ ### Middleware
+ 
+ ### Reporting
+ 
+ ### Summarization
+ 
+ ### Landing page
+ 
+ ### Testing
+ 
+ ### Security
+ 
+ ### Database
+ 
+ ### User interface / views
+ 
+ ### APIs
+ 
+ ### Deployment
+ 
+ ### Documentation
