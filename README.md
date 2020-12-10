@@ -1,6 +1,8 @@
 # Project for Web software development course in Aalto
 
-## Creating the database
+## Running the project
+
+### Creating the database
 Create the database by running the following CREATE TABLE commands in your database:  
 
 CREATE TABLE users (  
@@ -29,7 +31,7 @@ CREATE TABLE users (
 
  ALTER TABLE health_reports ALTER COLUMN evening_report SET DEFAULT false;  
  
- ## Running the project locally
+ ### Running the project locally
  The project can be run locally from the file app.js.  
  To run the application locally go to the root directory where the app.js should be.  
  Then run the following command:  
@@ -37,10 +39,12 @@ CREATE TABLE users (
  The application should now be running at http://localhost:7777/  
  
  
- ## Running tests
+ ### Running tests
  All of the tests can be run with the following command:   
  * deno run app_test.js
  
- ## Access application
+ ### Access application
  The application can currently be accessed at the following address:  
  http://www.some-address.com/  
+ 
+ ## Project requirements implemented in the project
