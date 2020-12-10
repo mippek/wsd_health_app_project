@@ -46,7 +46,7 @@ CREATE TABLE health_reports (
  The different test files can also be run individually with the following command:
  * `deno test --unstable --allow-env --allow-net ./tests/app_test.js` 
  
- Where ./tests/app_test.js should be replaced with the path of the test file that you want to test.
+ Where ./tests/app_test.js should be replaced with the path of the test file that you want to test.  
  Note that the individual test files can't be run without the path to the file!
  
  ### Access application
