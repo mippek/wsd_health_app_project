@@ -1,16 +1,6 @@
 import { executeQuery } from "../database/database.js";
 import { validate, required, isDate, isNumber, isInt, numberBetween } from "../deps.js";
 
-/*const validationRules = {
-    date: [required, isDate],
-    mood: [required, isInt, numberBetween(1,5)],
-    sleep_duration: [required, isNumber, numberBetween(0, 24)],
-    sleep_quality: [required, isInt, numberBetween(1,5)],
-    exercise_time: [required, isNumber, numberBetween(0, 24)],
-    study_time: [required, isNumber, numberBetween(0, 24)],
-    eating_quality: [required, isInt, numberBetween(1,5)],
-};*/
-
 const morningValidationRules = {
     date: [required, isDate],
     mood: [required, isInt, numberBetween(1,5)],
@@ -33,10 +23,6 @@ const validateData = async(data, isMorning) => {
         return await validate(data, eveningValidationRules);
     }
 }
-
-/*const validateData = async(data) => {
-    return await validate(data, validationRules);
-}*/
 
 const returnNumberIfNumber = (value) => {
     if (!value) {
@@ -63,7 +49,10 @@ const getData = async(request, isMorning) => {
 
     if (request) {
         const body = request.body();
+        console.log('body');
+        console.log(body);
         const params = await body.value;
+        console.log(params);
         data.date = params.get('date');
         data.mood = returnNumberIfNumber(params.get('mood'));
         if (isMorning) {
@@ -126,7 +115,7 @@ const setData = async(data, userId, isMorning) => {
 }
 
 const getTodaysReportsFromDb = async(date, userId, isMorning) => {
-    return (await executeQuery("SELECT * FROM health_reports WHERE date = $1 AND user_id = $2 AND morning_report = $3", date, userId, isMorning)).rowCount;
+    return (await executeQuery("SELECT * FROM health_reports WHERE date = $1 AND user_id = $2 AND morning_report = $3", date, userId, isMorning)).rowsOfObjects();
 }
 
 export { validateData, returnNumberIfNumber, getData, setData, getTodaysReportsFromDb };

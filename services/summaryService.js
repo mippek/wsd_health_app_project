@@ -20,6 +20,9 @@ const validateData = async(data, isWeek) => {
 }
 
 const getWeekNumber = (date) => {
+    if (isNaN(date)) {
+        return undefined;
+    }
     const dt = new Date(date.valueOf());
     dt.setDate(dt.getDate() - 7);
     const dayn = (date.getDay() + 6) % 7;
@@ -33,13 +36,17 @@ const getWeekNumber = (date) => {
 }
 
 const getMonthNumber = (date) => {
-    const current_month = new Date().getMonth() + 1;
+    if (isNaN(date)) {
+        return undefined;
+    }
+    const current_month = date.getMonth() + 1;
     let previous_month = current_month - 1;
     if (current_month === 1) {
         previous_month = 12;
     }
 
     return previous_month;
+    
 }
 
 let default_data = {
@@ -127,4 +134,4 @@ const getMonthlyAvg = async(month, userId) => {
     return res;
 }
 
-export { validateData, getSummaryData, setSummaryData, getDailyAvg, getWeeklyAvg, getMonthlyAvg };
+export { validateData, getWeekNumber, getMonthNumber, getSummaryData, setSummaryData, getDailyAvg, getWeeklyAvg, getMonthlyAvg };

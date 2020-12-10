@@ -12,10 +12,10 @@ const showReporting = async({render, session}) => {
     let morning = false;
     let evening = false;
 
-    if (morningReports > 0) {
+    if (morningReports.length > 0) {
         morning = true;
     }
-    if (eveningReports > 0) {
+    if (eveningReports.length > 0) {
         evening = true;
     }
 

@@ -27,3 +27,5 @@ app.use(oakCors());
 app.use(router.routes());
 
 app.listen({ port: 7777 });
+
+export { app };
