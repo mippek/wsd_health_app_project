@@ -59,10 +59,10 @@ CREATE TABLE health_reports (
  ## Project requirements implemented in the project
  
  ### Application structure
- The application is divided into logical parts as in the part on Structuring Web Applications in the course material.  
- All dependencies are exported from deps.js.  
- Projects is launched from app.js, which can be found in the root folder of the project.  
- Configurations are in a separate folder, config. Configurations are loaded from environmental variables. Production configurations are added with the environmental variable DATABASE_URL. Otherwise, the configurations for testing and running the program locally are loaded from environmental variables PGPORT, PGDATABASE, PGHOST, PGUSER and PGPASSWORD.  
+ *The application is divided into logical parts as in the part on Structuring Web Applications in the course material.  
+ *All dependencies are exported from deps.js.  
+ *Projects is launched from app.js, which can be found in the root folder of the project.  
+ *Configurations are in a separate folder, config. Configurations are loaded from environmental variables. Production configurations are added with the environmental variable DATABASE_URL. Otherwise, the configurations for testing and running the program locally are loaded from environmental variables PGPORT, PGDATABASE, PGHOST, PGUSER and PGPASSWORD.  
  
  ### Users
  For each user, email and password are stored in the database. The passwords are stored as a hash counted from the password where the password is encrypted with bcrypt. Emails are unique, each email can only be stored once in the database.  
