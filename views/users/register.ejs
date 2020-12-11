@@ -4,13 +4,13 @@
 
 <form method='POST' action='/auth/registration'>
     <label for='email'>Email:</label>
-    <input type='email' id='email' name='email' value='<%= email %>' />
+    <input type='email' id='email' name='email' value='<%= email %>' required />
     <%- include('../partials/error.ejs', { errors: errors, attribute: 'email'}) %>
     <label for='password'>Password:</label>
-    <input type='password' id='password' name='password' />
+    <input type='password' id='password' name='password' required />
     <%- include('../partials/error.ejs', { errors: errors, attribute: 'password'}) %>
     <label for='verification'>Verify password:</label>
-    <input type='password' id='verification' name='verification' />
+    <input type='password' id='verification' name='verification' required />
     <%- include('../partials/error.ejs', { errors: errors, attribute: 'verification'}) %>
     <input type='submit' value='Register' />
 </form>

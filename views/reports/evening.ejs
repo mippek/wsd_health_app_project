@@ -3,33 +3,38 @@
 <h1>Evening report:</h1>
 
 <form method='POST' action='/behavior/reporting/evening'>
-    <label for='date'>Date:</label>
-    <input type='date' id='date' name='date' value='<%= date %>' />
-    <%- include('../partials/error.ejs', { errors: errors, attribute: 'date'}) %>
-    <script>document.getElementById('date').value = new Date().toISOString().substring(0, 10)</script>
-    <br />
+    <%- include('../partials/forms/dateField.ejs', { date: date, errors: errors }) %>
 
-    <label for='exercise_time'>Time spent exercising (in hours, with 0.5h accuracy):</label>
-    <input type='number' id='exercise_time' name='exercise_time' value='<%= exercise_time %>' min='0' max='24' step='0.1' />
-    <%- include('../partials/error.ejs', { errors: errors, attribute: 'exercise_time'}) %>
-    <br />
+    <%- include('../partials/forms/numberField.ejs', {
+        name: 'exercise_time', 
+        text: 'Time spent exercising',
+        value: exercise_time, 
+        errors: errors 
+    }) %>
 
-    <label for='study_time'>Time spent studying (in hours, with 0.5h accuracy):</label>
-    <input type='number' id='study_time' name='study_time' value='<%= study_time %>' min='0' max='24' step='0.1' />
-    <%- include('../partials/error.ejs', { errors: errors, attribute: 'study_time'}) %>
-    <br />
+    <%- include('../partials/forms/numberField.ejs', {
+        name: 'study_time', 
+        text: 'Time spent studying',
+        value: study_time, 
+        errors: errors 
+    }) %>
 
-    <label for='eating_quality'>Quality of eating (on scale 1-5):</label>
-    <input type='range' id='eating_quality' name='eating_quality' value='<%= eating_quality %>' min='1' max='5' onchange="updateValue('eating_quality', 'eating_quality_value')" />
-    <label for='eating_quality' id='eating_quality_value'> 3 - okay </label>
-    <%- include('../partials/error.ejs', { errors: errors, attribute: 'eating_quality'}) %>
-    <br />
+    <%- include('../partials/forms/sliderField.ejs', {
+        name: 'eating_quality', 
+        value_id: 'eating_quality_value', 
+        text: 'Quality of eating',
+        value: eating_quality, 
+        errors: errors 
+    }) %>
 
-    <label for='mood'>Generic mood (on scale 1-5):</label>
-    <input type='range' id='mood' name='mood' value='<%= mood %>' min='1' max='5' onchange="updateValue('mood', 'mood_value')" />
-    <label for='mood' id='mood_value'> 3 - okay </label>
-    <%- include('../partials/error.ejs', { errors: errors, attribute: 'mood'}) %>
-    <br />
+    <%- include('../partials/forms/sliderField.ejs', {
+        name: 'mood', 
+        value_id: 'mood_value', 
+        text: 'Generic mood',
+        value: mood, 
+        errors: errors 
+    }) %>
+
     <input type='submit' value='Send report!' />
 </form>
 

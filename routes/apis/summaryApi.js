@@ -16,11 +16,6 @@ const showSummaryAvgForDay = async({params, response}) => {
     const year = params.year;
     const month = params.month;
     const day = params.day;
-    const date = new Date(year, month, day).toISOString().split('T')[0];
-
-    console.log(year);
-    console.log(month);
-    console.log(day);
 
     const res = (await executeQuery("SELECT COALESCE(AVG(CAST(mood AS FLOAT)), 0) AS avg_mood, COALESCE(AVG(sleep_duration), 0) AS avg_sleep_duration, COALESCE(AVG(CAST(sleep_quality AS FLOAT)), 0) AS avg_sleep_quality, COALESCE(AVG(exercise_time), 0) AS avg_exercise_time, COALESCE(AVG(study_time), 0) AS avg_study_time FROM health_reports WHERE DATE_PART('year', date) = $1 AND DATE_PART('month', date) = $2 AND DATE_PART('day', date) = $3", year, month, day)).rowsOfObjects();
 

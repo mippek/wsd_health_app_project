@@ -5,7 +5,7 @@
                 Average sleep duration:
             </td>
             <td>
-                <%= average.avg_sleep_duration %>
+                <%= +(Math.round(average.avg_sleep_duration + "e+2") + "e-2") %>
             </td>
         </tr>
         <tr>
@@ -13,7 +13,7 @@
                 Average sleep quality:
             </td>
             <td>
-                <%= average.avg_sleep_quality %>
+                <%= +(Math.round(average.avg_sleep_quality + "e+2") + "e-2") %>
             </td>
         </tr>
         <tr>
@@ -21,7 +21,7 @@
                 Average time spent on sports and exercise:
             </td>
             <td>
-                <%= average.avg_exercise_time %>
+                <%= +(Math.round(average.avg_exercise_time + "e+2") + "e-2") %>
             </td>
         </tr>
         <tr>
@@ -29,7 +29,7 @@
                 Average time spent studying:
             </td>
             <td>
-                <%= average.avg_study_time %>
+                <%= +(Math.round(average.avg_study_time + "e+2") + "e-2") %>
             </td>
         </tr>
         <tr>
@@ -37,7 +37,7 @@
                 Average mood:
             </td>
             <td>
-                <%= average.avg_mood %>
+                <%= +(Math.round(average.avg_mood + "e+2") + "e-2") %>
             </td>
         </tr>
     </table>  

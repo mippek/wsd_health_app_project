@@ -4,15 +4,15 @@ const setDate = () => {
 
 const updateValue = (id, valueId) => {
     const value = document.querySelector(`#${id}`).value;
-    let text = '3 - okay';
+    let text = 'Your choice: 3 - okay';
     if (value === '1') {
-        text = '1 - very poor';
+        text = 'Your choice: 1 - very poor';
     } else if (value === '2') {
-        text = '2 - poor';
+        text = 'Your choice: 2 - poor';
     } else if (value === '4') {
-        text = '4 - good';
+        text = 'Your choice: 4 - good';
     } else if (value === '5') {
-        text = '5 - very good';
+        text = 'Your choice: 5 - very good';
     }
     document.querySelector(`#${valueId}`).innerHTML = text;
 }
@@ -63,7 +63,7 @@ const selectMonthForm = () => {
         if (test.type === 'text') {
             defaultMonth.style.display = 'none';
             backupMonth.style.display = 'block';
-            for(let i = 1; i <= 12; i++) {
+            for(let i = 1; i <= 13; i++) {
                 const option = document.createElement('option');
                 option.textContent = (i < 10) ? ("0" + i) : i;
                 option.value = i;

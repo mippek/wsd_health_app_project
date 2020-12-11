@@ -49,10 +49,7 @@ const getData = async(request, isMorning) => {
 
     if (request) {
         const body = request.body();
-        console.log('body');
-        console.log(body);
         const params = await body.value;
-        console.log(params);
         data.date = params.get('date');
         data.mood = returnNumberIfNumber(params.get('mood'));
         if (isMorning) {
@@ -103,8 +100,8 @@ const setData = async(data, userId, isMorning) => {
         dbData.eating_quality = null;
 
     } else {
-        dbData.morningReport = false;
-        dbData.eveningReport = true;
+        dbData.morning_report = false;
+        dbData.evening_report = true;
         dbData.sleep_duration = null;
         dbData.sleep_quality = null;
     }

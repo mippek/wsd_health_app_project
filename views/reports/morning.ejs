@@ -3,28 +3,31 @@
 <h1>Morning report:</h1>
 
 <form method='POST' action='/behavior/reporting/morning'>
-    <label for='date'>Date:</label>
-    <input type='date' id='date' name='date' value='<%= date %>' />
-    <%- include('../partials/error.ejs', { errors: errors, attribute: 'date'}) %>
-    <script>document.getElementById('date').value = new Date().toISOString().substring(0, 10)</script>
-    <br />
+    <%- include('../partials/forms/dateField.ejs', { date: date, errors: errors }) %>
 
-    <label for='sleep_duration'>Sleep duration (in hours, with 0.5h accuracy):</label>
-    <input type='number' id='sleep_duration' name='sleep_duration' value='<%= sleep_duration %>' min='0' max='24' step='0.1' />
-    <%- include('../partials/error.ejs', { errors: errors, attribute: 'sleep_duration'}) %>
-    <br />
+    <%- include('../partials/forms/numberField.ejs', {
+        name: 'sleep_duration', 
+        text: 'Sleep duration',
+        value: sleep_duration, 
+        errors: errors 
+    }) %>
 
-    <label for='sleep_quality'>Sleep quality (on scale 1-5):</label>
-    <input type='range' id='sleep_quality' name='sleep_quality' value='<%= sleep_quality %>' min='1' max='5' onchange="updateValue('sleep_quality', 'sleep_quality_value')" />
-    <label for='sleep_quality' id='sleep_quality_value'> 3 - okay </label>
-    <%- include('../partials/error.ejs', { errors: errors, attribute: 'sleep_quality'}) %>
-    <br />
-    
-    <label for='mood'>Generic mood (on scale 1-5):</label>
-    <input type='range' id='mood' name='mood' value='<%= mood %>' min='1' max='5' onchange="updateValue('mood', 'mood_value')" />
-    <label for='mood' id='mood_value'> 3 - okay </label>
-    <%- include('../partials/error.ejs', { errors: errors, attribute: 'mood'}) %>
-    <br />
+    <%- include('../partials/forms/sliderField.ejs', {
+        name: 'sleep_quality', 
+        value_id: 'sleep_quality_value', 
+        text: 'Sleep quality',
+        value: sleep_quality, 
+        errors: errors 
+    }) %>
+
+    <%- include('../partials/forms/sliderField.ejs', {
+        name: 'mood', 
+        value_id: 'mood_value', 
+        text: 'Generic mood',
+        value: mood, 
+        errors: errors 
+    }) %>
+
     <input type='submit' value='Send report!' />
 </form>
 

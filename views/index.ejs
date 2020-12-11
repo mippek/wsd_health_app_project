@@ -10,8 +10,8 @@
     Only users logged in can submit reports and view report summaries. To login press the Login button at the 
     top of the page. If you don't have an account, you can register by pressing on the Register button next to it.
     <br/><br/>
-    After you've logged in you see button Reports and Summary at the top of the page. Reports can be made from 
-    the button Reports. There you can choose whether you want to make an morning report or an evening report. 
+    After you've logged in you see the buttons Reports and Summary at the top of the page. Reports can be made from 
+    the button Reports. There you can choose whether you want to make a morning report or an evening report. 
     Pressing on the button of your choice leads you to the correct form. By default a new report is made for the 
     current date but the date can be changed to be able to make older reports as well. However, only one morning 
     report and one evening report is saved for each day. If you already have made the report for the day that you
@@ -28,14 +28,14 @@
 <% if (avg_mood_today && avg_mood_yesterday) { %>
     <% if (avg_mood_yesterday > avg_mood_today) { %>
         <p>things are looking gloomy today &#8595</p>
-    <% } else { %>
+    <% } else if (avg_mood_yesterday < avg_mood_today) { %>
         <p>things are looking bright today &#8593</p>
     <% } %>
-    <%- include('./partials/tables/moodAvg.ejs', { avg_mood_today: avg_mood_today, avg_mood_yesterday: avg_mood_today }) %>
+    <%- include('./partials/tables/moodAvg.ejs', { avg_mood_today: avg_mood_today, avg_mood_yesterday: avg_mood_yesterday }) %>
 <% } else if (avg_mood_today) { %>
     <%- include('./partials/tables/moodAvg.ejs', { avg_mood_today: avg_mood_today, avg_mood_yesterday: 'No data' }) %>
 <% } else if (avg_mood_yesterday) { %>
-    <%- include('./partials/tables/moodAvg.ejs', { avg_mood_today: 'No data', avg_mood_yesterday: avg_mood_today }) %>
+    <%- include('./partials/tables/moodAvg.ejs', { avg_mood_today: 'No data', avg_mood_yesterday: avg_mood_yesterday }) %>
 <% } else { %>
     <%- include('./partials/tables/moodAvg.ejs', { avg_mood_today: 'No data', avg_mood_yesterday: 'No data' }) %>
 <% } %>

@@ -1,10 +1,18 @@
 <table>
     <tr>
         <td>Average mood today:</td>
-        <td><%= avg_mood_today %></td>
+        <% if (Number.isNaN(Number(avg_mood_today))) { %>
+            <td><%= avg_mood_today %></td>
+        <% } else { %>
+            <td><%= +(Math.round(avg_mood_today + "e+2") + "e-2") %></td>
+        <% } %>
     </tr>
     <tr>
         <td>Average mood yesterday:</td>
-        <td><%= avg_mood_yesterday %></td>
+        <% if (Number.isNaN(Number(avg_mood_today))) { %>
+            <td><%= avg_mood_yesterday %></td>
+        <% } else { %>
+            <td><%= +(Math.round(avg_mood_yesterday + "e+2") + "e-2") %></td>
+        <% } %>
     </tr>
 </table>

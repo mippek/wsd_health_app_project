@@ -1,5 +1,5 @@
 import { executeQuery } from "../database/database.js";
-import { validate, required, isDate, isInt, numberBetween } from "../deps.js";
+import { validate, required, isInt, numberBetween } from "../deps.js";
 import { returnNumberIfNumber } from "./reportService.js";
 
 const weekValidationRules = {

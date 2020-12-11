@@ -1,0 +1,9 @@
+<label for='<%= name %>'><%= text %> (on scale 1-5):</label>
+<p id='<%= value_id %>'>Your choice: 3 - okay</p>
+<div>
+    1 - very poor
+    <input type='range' id='<%= name %>' name='<%= name %>' value='<%= value %>' min='1' max='5' onchange="updateValue('<%= name %>', '<%= value_id %>')" required />
+    5 - very good
+</div>
+<%- include('../error.ejs', { errors: errors, attribute: name}) %>
+<br />

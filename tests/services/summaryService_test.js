@@ -1,6 +1,4 @@
 import { assertEquals } from "../../deps.js";
-import { superoak } from "https://deno.land/x/superoak@2.3.1/mod.ts";
-import { app } from "../../app.js";
 import { validateData, getWeekNumber, getMonthNumber, getSummaryData, setSummaryData } from "../../services/summaryService.js";
 
 Deno.test({

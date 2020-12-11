@@ -53,8 +53,8 @@ const submitSummaryMonth = async({request, render, response, session}) => {
     
     if (!passes) {
         data.month_errors = errors;
-        data.month_no = '--';
-        data.month_year = '----';
+        data.month_no = !data.month_no ? '--' : data.month_no;
+        data.month_year = !data.month_year ? '----' : data.week_year;
         data.monthly_average = null;
         data.user = user;
         render('summary.ejs', data);
