@@ -35,7 +35,7 @@ CREATE TABLE health_reports (
  The project can be run locally from the file app.js in the root directory of the project.  
  To run the application locally go to the root directory, you should find the file app.js there.  
  Then run the following command:  
- * `deno run --unstable --allow-env --allow-read --allow-net app.js`    
+ * `PGHOST='dbhost' PGDATABASE='database PGUSER='dbuser' PGPASSWORD='dbpassword' PGPORT=5432 deno run --unstable --allow-env --allow-read --allow-net app.js`    
  
  The application should now be running at http://localhost:7777/  
  
