@@ -35,18 +35,22 @@ CREATE TABLE health_reports (
  The project can be run locally from the file app.js in the root directory of the project.  
  To run the application locally go to the root directory, you should find the file app.js there.  
  Then run the following command:  
- * `PGHOST='dbhost' PGDATABASE='database PGUSER='dbuser' PGPASSWORD='dbpassword' PGPORT=5432 deno run --unstable --allow-env --allow-read --allow-net app.js`    
+ * `PGHOST='dbhost' PGDATABASE='db' PGUSER='dbuser' PGPASSWORD='dbpassword' PGPORT=5432 deno run --unstable --allow-env --allow-read --allow-net app.js`    
  
+ Where PGHOST is the host of your database, PGDATABASE the database, PGUSER the user of the database(usually same as the database), PGPASSWORD the password 
+ for the database and PGPORT the port where the database is running. The environmental variables are the same as those used during the course.  
  The application should now be running at http://localhost:7777/  
  
  ### Running tests
- All of the tests can be run with the following command:   
- * `deno test --unstable --allow-env --allow-net`  
+ All of the tests can be run at once with the following command:   
+ * `PGHOST='dbhost PGDATABASE='db' PGUSER='dbuser PGPASSWORD='dbpassword' PGPORT=5432 deno test --unstable --allow-env --allow-net --allow-read` 
  
  The different test files can also be run individually with the following command:
- * `deno test --unstable --allow-env --allow-net ./tests/app_test.js` 
+ * `PGHOST='dbhost' PGDATABASE='db' PGUSER='dbuser' PGPASSWORD='dbpassword' PGPORT=5432 deno test --unstable --allow-env --allow-net --allow-read ./tests/app_test.js` 
  
- Where ./tests/app_test.js should be replaced with the path of the test file that you want to test.  
+ Where PGHOST is the host of your database, PGDATABASE the database, PGUSER the user of the database(usually same as the database), PGPASSWORD the password 
+ for the database and PGPORT the port where the database is running.  
+ While running test files individually ./tests/app_test.js should be replaced with the path of the test file that you want to run test for.  
  Note that the individual test files can't be run without the path to the file!
  
  ### Access application
