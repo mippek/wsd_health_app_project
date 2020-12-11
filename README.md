@@ -131,8 +131,8 @@ CREATE TABLE health_reports (
  * The application provides API endpoints for retrieving summary data generated over all users in a JSON format.  
  * The API is accessible by all.  
  * The API allows cross-origin requests.  
- * The endpoint /api/summary provides a JSON document with averages for sleep duration, exercise time, study time, sleep quality and mood over the last 7 days. It looks at the last 7 days, including today, not the last week as in the summary for individual users.  
- * The endpoint /api/summary/:year/:month/:day provides a JSON document with averages for sleep duration, exercise time, study time, sleep quality and mood for the given day.  
+ * The endpoint /api/summary provides a JSON document with averages for sleep duration, exercise time, study time, sleep quality and mood over the last 7 days. It looks at the last 7 days, including today, not the last week as in the summary for individual users. If some of the attributes does not have any other than null values from the past 7 days, 0 is showed as average instead.  
+ * The endpoint /api/summary/:year/:month/:day provides a JSON document with averages for sleep duration, exercise time, study time, sleep quality and mood for the given day. If some of the attributes does not have any other than null values from that day, 0 is showed as average instead.  
  
  ### Deployment
  * The application is available and working at an online location, Heroku, at the address provided in the beginning of this document in the part access application.  
