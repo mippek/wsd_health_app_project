@@ -49,12 +49,13 @@ CREATE TABLE health_reports (
  * `PGHOST='dbhost' PGDATABASE='db' PGUSER='dbuser' PGPASSWORD='dbpassword' PGPORT=5432 deno test --unstable --allow-env --allow-net --allow-read ./tests/app_test.js` 
  
  Where PGHOST is the host of your database, PGDATABASE the database, PGUSER the user of the database(usually same as the database), PGPASSWORD the password 
- for the database and PGPORT the port where the database is running.  
+ for the database and PGPORT the port where the database is running.   
+ In both commands the environmental variables should be the details for the testdatabase, not the actual database used for the app!   
  While running test files individually ./tests/app_test.js should be replaced with the path of the test file that you want to run test for.  
  Note that the individual test files can't be run without the path to the file!
  
  ### Access application
- The application is currently running and can be accessed at http://www.some-address.com/  
+ The application is currently running and can be accessed at https://wsd-health-report-app.herokuapp.com/  
  
  ## Project requirements implemented in the project
  
@@ -62,7 +63,7 @@ CREATE TABLE health_reports (
  * The application is divided into logical parts as in the part on Structuring Web Applications in the course material.  
  * All dependencies are exported from deps.js.  
  * Projects is launched from app.js, which can be found in the root folder of the project.  
- * Configurations are in a separate folder, config. Configurations are loaded from environmental variables. Production configurations are added with the environmental variable DATABASE_URL. Otherwise, the configurations for testing and running the program locally are loaded from environmental variables PGPORT, PGDATABASE, PGHOST, PGUSER and PGPASSWORD.  
+ * Configurations are in a separate folder, config. Configurations are loaded from environmental variables. Production configurations are added with the environmental variable DATABASE_URL. Otherwise, the configurations for testing and running the program locally are loaded from environmental variables PGPORT, PGDATABASE, PGHOST, PGUSER and PGPASSWORD. Thus, no separate configurations for the test environment are needed, but the environmental variables added to the command line when testing should be the details of the test database, not the actual database that the app otherwise uses. 
  
  ### Users
  * For each user, email and password are stored in the database. The passwords are stored as a hash counted from the password where the password is encrypted with bcrypt. Emails are unique, each email can only be stored once in the database.  
@@ -94,6 +95,12 @@ CREATE TABLE health_reports (
  * Reporting functionality is structured into logical parts. The views are structured into a separate views folder where there are three different reporting views, reporting.ejs for /behavior/reporting, morning.ejs for /behavior/reporting/morning and evening.ejs for /behavior/reporting/evening. The functionality is structured in reportController.js and reportService.js where reportController handles the different requests and reportService makes queries to the database and contains validation functionality.  
  
  ### Summarization
+ * The summary functionality is available at the path /behavior/summary.   
+ * The main summary page contains the statistics, averages for sleep duration, time spent on exercise, time spent on studying, sleep quality and mood, by default for the last week and last month. Both averages for the week and the averages for the month are shown on the same page /behavior/summary.
+ * The summary page has a selector for the week and the month. Both of these forms are shown on the same page as the summary itself. The week selector uses the input type week if it is supproted by the browser or otherwise uses select fields for the week and the year. Similarly, the month selector uses the input type month if it is supported by the browser or otherwise uses select fields for the month and the year. To see how the week and month input types work, use Chrome, otherwise use ed. Mozilla Firefox. In both cases the weeks and months can de chosen from a time period between 2017-01-01 and 2020-12-31. When the week is changed the weekly average will be shown for the given week and when the month is changed the monthly average will be shown for the given month. If no data exists for the given week or month, the summary will show a text 'No data for the given time period exists'.
+ * The summary data, the averages, are calculated within the database when doing both weekly and monthly reporting.
+ * The summarization contains data only for the current user.
+ * The fields for the week and month selection forms are not populated straight to the form fields because the types of the forms are either week and month or select. However, the user sees the previously selected month as text above the fields. In case of a validation error, the selected week and year or month and year are populated there. If no week or year is selected, '--' and '----' are shown to the user. The same applies to selecting the month.
  
  ### Landing page
  * The landing page contains a description of the application.  
